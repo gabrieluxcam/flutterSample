@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/product_provider.dart';
 import '../providers/cart_provider.dart';
+import 'package:flutter_uxcam/flutter_uxcam.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   final String productId;
@@ -39,6 +40,10 @@ class ProductDetailScreen extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   context.read<CartProvider>().addItem(product);
+                  FlutterUxcam.logEventWithProperties('ProductAdded', {
+                    'product_id': product.id,
+                    'price': product.price,
+                  });
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Added to cart')),
                   );

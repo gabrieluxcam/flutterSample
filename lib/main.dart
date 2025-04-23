@@ -17,8 +17,18 @@ import 'screens/checkout_success_screen.dart';
 import 'screens/credit_cards_screen.dart';
 import 'screens/order_history_screen.dart';
 import 'theme.dart';
+import 'package:flutter_uxcam/flutter_uxcam.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  FlutterUxcam.optIntoSchematicRecordings();
+  await FlutterUxcam.startWithConfiguration(
+    FlutterUxConfig(
+      userAppKey: "djazkur7hg5icjx",
+      enableAutomaticScreenNameTagging: false,
+      enableIntegrationLogging: true,
+    ),
+  );
   runApp(
     MultiProvider(
       providers: [
@@ -39,6 +49,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final router = GoRouter(
       initialLocation: '/',
+      observers: [FlutterUxcamNavigatorObserver()],
       routes: [
         GoRoute(path: '/', builder: (ctx, state) => const SplashScreen()),
         GoRoute(path: '/login', builder: (ctx, state) => const LoginScreen()),
@@ -54,12 +65,14 @@ class MyApp extends StatelessWidget {
           routes: [
             GoRoute(
               path: '/home/products',
-              pageBuilder: (ctx, state) => CustomTransitionPage<void>(
-                key: state.pageKey,
-                child: const ProductsListScreen(),
-                transitionsBuilder: (ctx, anim, secAnim, child) =>
-                    FadeTransition(opacity: anim, child: child),
-              ),
+              pageBuilder:
+                  (ctx, state) => CustomTransitionPage<void>(
+                    key: state.pageKey,
+                    child: const ProductsListScreen(),
+                    transitionsBuilder:
+                        (ctx, anim, secAnim, child) =>
+                            FadeTransition(opacity: anim, child: child),
+                  ),
               routes: [
                 GoRoute(
                   path: ':id',
@@ -72,12 +85,14 @@ class MyApp extends StatelessWidget {
             ),
             GoRoute(
               path: '/home/cart',
-              pageBuilder: (ctx, state) => CustomTransitionPage<void>(
-                key: state.pageKey,
-                child: const CartScreen(),
-                transitionsBuilder: (ctx, anim, secAnim, child) =>
-                    FadeTransition(opacity: anim, child: child),
-              ),
+              pageBuilder:
+                  (ctx, state) => CustomTransitionPage<void>(
+                    key: state.pageKey,
+                    child: const CartScreen(),
+                    transitionsBuilder:
+                        (ctx, anim, secAnim, child) =>
+                            FadeTransition(opacity: anim, child: child),
+                  ),
               routes: [
                 GoRoute(
                   path: 'checkout',
@@ -87,30 +102,36 @@ class MyApp extends StatelessWidget {
             ),
             GoRoute(
               path: '/home/profile',
-              pageBuilder: (ctx, state) => CustomTransitionPage<void>(
-                key: state.pageKey,
-                child: const ProfileScreen(),
-                transitionsBuilder: (ctx, anim, secAnim, child) =>
-                    FadeTransition(opacity: anim, child: child),
-              ),
+              pageBuilder:
+                  (ctx, state) => CustomTransitionPage<void>(
+                    key: state.pageKey,
+                    child: const ProfileScreen(),
+                    transitionsBuilder:
+                        (ctx, anim, secAnim, child) =>
+                            FadeTransition(opacity: anim, child: child),
+                  ),
             ),
             GoRoute(
               path: '/home/orders',
-              pageBuilder: (ctx, state) => CustomTransitionPage<void>(
-                key: state.pageKey,
-                child: const OrderHistoryScreen(),
-                transitionsBuilder: (ctx, anim, secAnim, child) =>
-                    FadeTransition(opacity: anim, child: child),
-              ),
+              pageBuilder:
+                  (ctx, state) => CustomTransitionPage<void>(
+                    key: state.pageKey,
+                    child: const OrderHistoryScreen(),
+                    transitionsBuilder:
+                        (ctx, anim, secAnim, child) =>
+                            FadeTransition(opacity: anim, child: child),
+                  ),
             ),
             GoRoute(
               path: '/home/my-cards',
-              pageBuilder: (ctx, state) => CustomTransitionPage<void>(
-                key: state.pageKey,
-                child: const CreditCardsScreen(),
-                transitionsBuilder: (ctx, anim, secAnim, child) =>
-                    FadeTransition(opacity: anim, child: child),
-              ),
+              pageBuilder:
+                  (ctx, state) => CustomTransitionPage<void>(
+                    key: state.pageKey,
+                    child: const CreditCardsScreen(),
+                    transitionsBuilder:
+                        (ctx, anim, secAnim, child) =>
+                            FadeTransition(opacity: anim, child: child),
+                  ),
             ),
           ],
         ),

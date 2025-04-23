@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import '../providers/auth_provider.dart';
+import 'package:flutter_uxcam/flutter_uxcam.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -37,6 +38,7 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(height: 24),
             ElevatedButton(
               onPressed: () {
+                FlutterUxcam.logEvent('Logout');
                 context.read<AuthProvider>().logout();
                 context.go('/login');
               },
@@ -84,7 +86,8 @@ class ProfileScreen extends StatelessWidget {
 // Dialog for editing the user's email
 class _EmailEditDialog extends StatefulWidget {
   final String initialEmail;
-  const _EmailEditDialog({Key? key, required this.initialEmail}) : super(key: key);
+  const _EmailEditDialog({Key? key, required this.initialEmail})
+    : super(key: key);
 
   @override
   _EmailEditDialogState createState() => _EmailEditDialogState();

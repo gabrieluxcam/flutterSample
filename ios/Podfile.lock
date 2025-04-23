@@ -2,6 +2,9 @@ PODS:
   - Flutter (1.0.0)
   - flutter_credit_card (0.0.1):
     - Flutter
+  - flutter_uxcam (2.6.0):
+    - Flutter
+    - UXCam (~> 3.6.24)
   - image_picker_ios (0.0.1):
     - Flutter
   - path_provider_foundation (0.0.1):
@@ -10,19 +13,27 @@ PODS:
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
+  - UXCam (3.6.24)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_credit_card (from `.symlinks/plugins/flutter_credit_card/ios`)
+  - flutter_uxcam (from `.symlinks/plugins/flutter_uxcam/ios`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
+
+SPEC REPOS:
+  trunk:
+    - UXCam
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
   flutter_credit_card:
     :path: ".symlinks/plugins/flutter_credit_card/ios"
+  flutter_uxcam:
+    :path: ".symlinks/plugins/flutter_uxcam/ios"
   image_picker_ios:
     :path: ".symlinks/plugins/image_picker_ios/ios"
   path_provider_foundation:
@@ -33,9 +44,11 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_credit_card: 48fb35065294868bc6a3e7f18a42f28929b84f48
+  flutter_uxcam: 0436548c615b1fb4ded354283d24365df59e9cbc
   image_picker_ios: c560581cceedb403a6ff17f2f816d7fea1421fc1
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
+  UXCam: 399faac85541b992709358b30a318137a0ca8b07
 
 PODFILE CHECKSUM: 4305caec6b40dde0ae97be1573c53de1882a07e5
 

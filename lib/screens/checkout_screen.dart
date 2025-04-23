@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
+import 'package:flutter_uxcam/flutter_uxcam.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import '../providers/cart_provider.dart';
@@ -39,11 +40,16 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     final orderId = DateTime.now().millisecondsSinceEpoch.toString();
     Provider.of<CartProvider>(context, listen: false).clearCart();
     setState(() => _isLoading = false);
+    FlutterUxcam.logEventWithProperties('PurchaseCompleted', {
+      'order_id': orderId,
+    });
     context.go('/order_success/$orderId');
   }
 
   @override
   Widget build(BuildContext context) {
+    FlutterUxcam.tagScreenName('CheckoutScreen');
+    FlutterUxcam.occludeSensitiveScreen(true);
     return Scaffold(
       appBar: AppBar(title: const Text('Checkout')),
       body: LoadingOverlay(

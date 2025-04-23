@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_uxcam/flutter_uxcam.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import '../providers/product_provider.dart';
@@ -29,7 +30,12 @@ class ProductsListScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                onChanged: (q) => context.read<ProductProvider>().filterBy(q),
+                onChanged: (q) {
+                  FlutterUxcam.logEventWithProperties('SearchPerformed', {
+                    'query': q,
+                  });
+                  context.read<ProductProvider>().filterBy(q);
+                },
               ),
             ),
             Expanded(

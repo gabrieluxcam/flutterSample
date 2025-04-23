@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import '../providers/auth_provider.dart';
 import '../widgets/loading_overlay.dart';
+import 'package:flutter_uxcam/flutter_uxcam.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -38,6 +39,8 @@ class _LoginScreenState extends State<LoginScreen> {
     await context.read<AuthProvider>().login(email, password);
     setState(() => _isLoading = false);
     if (context.read<AuthProvider>().isLoggedIn) {
+      FlutterUxcam.setUserIdentity(email);
+      FlutterUxcam.logEvent('LoginCompleted');
       context.go('/home/products');
     } else {
       setState(() => _error = 'Login failed');
@@ -46,6 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    FlutterUxcam.tagScreenName('LoginScreen');
     return Scaffold(
       appBar: AppBar(title: const Text('Log In')),
       body: LoadingOverlay(
@@ -66,7 +70,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 obscureText: true,
               ),
               const SizedBox(height: 24),
-              if (_error != null) Text(_error!, style: const TextStyle(color: Colors.red)),
+              if (_error != null)
+                Text(_error!, style: const TextStyle(color: Colors.red)),
               const SizedBox(height: 8),
               SizedBox(
                 width: double.infinity,
