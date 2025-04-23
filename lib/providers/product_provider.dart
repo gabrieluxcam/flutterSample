@@ -47,7 +47,30 @@ class ProductProvider extends ChangeNotifier {
     ),
   ];
 
-  List<Product> get products => _products;
+  late List<Product> _filteredProducts;
+
+  ProductProvider() {
+    _filteredProducts = List.from(_products);
+  }
+
+  List<Product> get products => _filteredProducts;
+
+  Future<void> fetchProducts() async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    _filteredProducts = List.from(_products);
+    notifyListeners();
+  }
+
+  void filterBy(String query) {
+    if (query.isEmpty) {
+      _filteredProducts = List.from(_products);
+    } else {
+      _filteredProducts = _products
+          .where((p) => p.title.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    }
+    notifyListeners();
+  }
 
   Product getById(String id) => _products.firstWhere((p) => p.id == id);
 }

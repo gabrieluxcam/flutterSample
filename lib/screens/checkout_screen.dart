@@ -4,6 +4,7 @@ import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import '../providers/cart_provider.dart';
+import '../widgets/loading_overlay.dart';
 
 class CheckoutScreen extends StatefulWidget {
   const CheckoutScreen({Key? key}) : super(key: key);
@@ -45,65 +46,69 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Checkout')),
-      body: SafeArea(
-        child: Column(
-          children: [
-            CreditCardWidget(
-              cardBgColor: Colors.blueAccent,
-              cardNumber: cardNumber,
-              expiryDate: expiryDate,
-              cardHolderName: cardHolderName,
-              cvvCode: cvvCode,
-              showBackView: isCvvFocused,
-              onCreditCardWidgetChange: (_) {},
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    CreditCardForm(
-                      formKey: _formKey,
-                      obscureCvv: true,
-                      obscureNumber: false,
-                      cardNumber: cardNumber,
-                      expiryDate: expiryDate,
-                      cardHolderName: cardHolderName,
-                      cvvCode: cvvCode,
-                      inputConfiguration: const InputConfiguration(
-                        cardNumberDecoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Number',
-                          hintText: 'XXXX XXXX XXXX XXXX',
+      body: LoadingOverlay(
+        isLoading: _isLoading,
+        child: SafeArea(
+          child: Column(
+            children: [
+              CreditCardWidget(
+                cardBgColor: Colors.blueAccent,
+                cardNumber: cardNumber,
+                expiryDate: expiryDate,
+                cardHolderName: cardHolderName,
+                cvvCode: cvvCode,
+                showBackView: isCvvFocused,
+                onCreditCardWidgetChange: (_) {},
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      CreditCardForm(
+                        formKey: _formKey,
+                        obscureCvv: true,
+                        obscureNumber: false,
+                        cardNumber: cardNumber,
+                        expiryDate: expiryDate,
+                        cardHolderName: cardHolderName,
+                        cvvCode: cvvCode,
+                        inputConfiguration: const InputConfiguration(
+                          cardNumberDecoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Number',
+                            hintText: 'XXXX XXXX XXXX XXXX',
+                          ),
+                          expiryDateDecoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Expired Date',
+                            hintText: 'XX/XX',
+                          ),
+                          cvvCodeDecoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'CVV',
+                            hintText: 'XXX',
+                          ),
+                          cardHolderDecoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Card Holder',
+                          ),
                         ),
-                        expiryDateDecoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Expired Date',
-                          hintText: 'XX/XX',
-                        ),
-                        cvvCodeDecoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'CVV',
-                          hintText: 'XXX',
-                        ),
-                        cardHolderDecoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Card Holder',
+                        onCreditCardModelChange: onCreditCardModelChange,
+                      ),
+                      const SizedBox(height: 20),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: _isLoading ? null : _pay,
+                          child: const Text('Pay'),
                         ),
                       ),
-                      onCreditCardModelChange: onCreditCardModelChange,
-                    ),
-                    const SizedBox(height: 20),
-                    _isLoading
-                        ? const CircularProgressIndicator()
-                        : ElevatedButton(
-                            onPressed: _pay,
-                            child: const Text('Pay'),
-                          ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

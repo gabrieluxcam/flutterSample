@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'providers/auth_provider.dart';
 import 'providers/product_provider.dart';
 import 'providers/cart_provider.dart';
+import 'providers/wishlist_provider.dart';
 import 'screens/splash_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/shell_screen.dart';
@@ -14,6 +15,8 @@ import 'screens/profile_screen.dart';
 import 'screens/checkout_screen.dart';
 import 'screens/checkout_success_screen.dart';
 import 'screens/credit_cards_screen.dart';
+import 'screens/order_history_screen.dart';
+import 'theme.dart';
 
 void main() {
   runApp(
@@ -22,6 +25,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => ProductProvider()),
         ChangeNotifierProvider(create: (_) => CartProvider()),
+        ChangeNotifierProvider(create: (_) => WishlistProvider()),
       ],
       child: const MyApp(),
     ),
@@ -50,7 +54,12 @@ class MyApp extends StatelessWidget {
           routes: [
             GoRoute(
               path: '/home/products',
-              builder: (ctx, state) => const ProductsListScreen(),
+              pageBuilder: (ctx, state) => CustomTransitionPage<void>(
+                key: state.pageKey,
+                child: const ProductsListScreen(),
+                transitionsBuilder: (ctx, anim, secAnim, child) =>
+                    FadeTransition(opacity: anim, child: child),
+              ),
               routes: [
                 GoRoute(
                   path: ':id',
@@ -63,7 +72,12 @@ class MyApp extends StatelessWidget {
             ),
             GoRoute(
               path: '/home/cart',
-              builder: (ctx, state) => const CartScreen(),
+              pageBuilder: (ctx, state) => CustomTransitionPage<void>(
+                key: state.pageKey,
+                child: const CartScreen(),
+                transitionsBuilder: (ctx, anim, secAnim, child) =>
+                    FadeTransition(opacity: anim, child: child),
+              ),
               routes: [
                 GoRoute(
                   path: 'checkout',
@@ -73,11 +87,30 @@ class MyApp extends StatelessWidget {
             ),
             GoRoute(
               path: '/home/profile',
-              builder: (ctx, state) => const ProfileScreen(),
+              pageBuilder: (ctx, state) => CustomTransitionPage<void>(
+                key: state.pageKey,
+                child: const ProfileScreen(),
+                transitionsBuilder: (ctx, anim, secAnim, child) =>
+                    FadeTransition(opacity: anim, child: child),
+              ),
+            ),
+            GoRoute(
+              path: '/home/orders',
+              pageBuilder: (ctx, state) => CustomTransitionPage<void>(
+                key: state.pageKey,
+                child: const OrderHistoryScreen(),
+                transitionsBuilder: (ctx, anim, secAnim, child) =>
+                    FadeTransition(opacity: anim, child: child),
+              ),
             ),
             GoRoute(
               path: '/home/my-cards',
-              builder: (ctx, state) => const CreditCardsScreen(),
+              pageBuilder: (ctx, state) => CustomTransitionPage<void>(
+                key: state.pageKey,
+                child: const CreditCardsScreen(),
+                transitionsBuilder: (ctx, anim, secAnim, child) =>
+                    FadeTransition(opacity: anim, child: child),
+              ),
             ),
           ],
         ),
@@ -95,7 +128,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp.router(
       title: 'Flutter E-commerce',
-      theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
+      theme: appTheme,
       routerConfig: router,
     );
   }
