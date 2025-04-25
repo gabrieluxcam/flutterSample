@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 
 class ShellScreen extends StatelessWidget {
   final Widget child;
-  const ShellScreen({Key? key, required this.child}) : super(key: key);
+  const ShellScreen({super.key, required this.child});
 
   int _calculateSelectedIndex(String location) {
     if (location.startsWith('/home/cart')) return 1;
@@ -36,8 +36,14 @@ class ShellScreen extends StatelessWidget {
         currentIndex: selectedIndex,
         onTap: (index) => _onItemTapped(context, index),
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.shopping_bag), label: 'Products'),
-          BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Cart'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_bag),
+            label: 'Products',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart),
+            label: 'Cart',
+          ),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
       ),

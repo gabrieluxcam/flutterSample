@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import '../providers/auth_provider.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+  const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +84,7 @@ class ProfileScreen extends StatelessWidget {
 // Dialog for editing the user's email
 class _EmailEditDialog extends StatefulWidget {
   final String initialEmail;
-  const _EmailEditDialog({Key? key, required this.initialEmail}) : super(key: key);
+  const _EmailEditDialog({super.key, required this.initialEmail});
 
   @override
   _EmailEditDialogState createState() => _EmailEditDialogState();

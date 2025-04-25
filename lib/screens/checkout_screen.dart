@@ -7,7 +7,7 @@ import '../providers/cart_provider.dart';
 import '../widgets/loading_overlay.dart';
 
 class CheckoutScreen extends StatefulWidget {
-  const CheckoutScreen({Key? key}) : super(key: key);
+  const CheckoutScreen({super.key});
 
   @override
   _CheckoutScreenState createState() => _CheckoutScreenState();

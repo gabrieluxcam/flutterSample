@@ -3,7 +3,7 @@ import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CreditCardsScreen extends StatefulWidget {
-  const CreditCardsScreen({Key? key}) : super(key: key);
+  const CreditCardsScreen({super.key});
 
   @override
   State<CreditCardsScreen> createState() => _CreditCardsScreenState();
@@ -42,9 +42,11 @@ class _CreditCardsScreenState extends State<CreditCardsScreen> {
         child: Column(
           children: [
             CreditCardWidget(
-              cardNumber: cardNumber.isNotEmpty ? cardNumber : '0000 0000 0000 0000',
+              cardNumber:
+                  cardNumber.isNotEmpty ? cardNumber : '0000 0000 0000 0000',
               expiryDate: expiryDate.isNotEmpty ? expiryDate : '00/00',
-              cardHolderName: cardHolderName.isNotEmpty ? cardHolderName : 'Your Name',
+              cardHolderName:
+                  cardHolderName.isNotEmpty ? cardHolderName : 'Your Name',
               cvvCode: cvvCode.isNotEmpty ? cvvCode : '000',
               showBackView: isCvvFocused,
               onCreditCardWidgetChange: (CreditCardBrand brand) {},
@@ -76,9 +78,9 @@ class _CreditCardsScreenState extends State<CreditCardsScreen> {
                 await prefs.setString('expiryDate', expiryDate);
                 await prefs.setString('cardHolderName', cardHolderName);
                 await prefs.setString('cvvCode', cvvCode);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Card saved')),
-                );
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(const SnackBar(content: Text('Card saved')));
               },
               child: const Text('Save Card'),
             ),
