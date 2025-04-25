@@ -16,6 +16,7 @@ import 'screens/checkout_screen.dart';
 import 'screens/checkout_success_screen.dart';
 import 'screens/credit_cards_screen.dart';
 import 'screens/order_history_screen.dart';
+import 'screens/signup_screen.dart';
 import 'theme.dart';
 
 void main() {
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
       routes: [
         GoRoute(path: '/', builder: (ctx, state) => const SplashScreen()),
         GoRoute(path: '/login', builder: (ctx, state) => const LoginScreen()),
+        GoRoute(path: '/signup', builder: (ctx, state) => const SignupScreen()),
         GoRoute(
           path: '/order_success/:orderId',
           builder: (ctx, state) {

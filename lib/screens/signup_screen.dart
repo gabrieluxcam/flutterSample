@@ -4,17 +4,18 @@ import 'package:go_router/go_router.dart';
 import '../providers/auth_provider.dart';
 import '../widgets/loading_overlay.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _nameController = TextEditingController();
   bool _isLoading = false;
   String? _error;
 
@@ -22,34 +23,27 @@ class _LoginScreenState extends State<LoginScreen> {
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _nameController.dispose();
     super.dispose();
   }
 
-  Future<void> _login() async {
+  Future<void> _signup() async {
     if (!_formKey.currentState!.validate()) return;
-    final email = _emailController.text.trim();
-    final password = _passwordController.text;
-    if (email.isEmpty || password.isEmpty) {
-      setState(() => _error = 'Please enter email and password');
-      return;
-    }
     setState(() {
       _isLoading = true;
       _error = null;
     });
-    await context.read<AuthProvider>().login(email, password);
+    // Dummy sign-up logic
+    await Future.delayed(const Duration(seconds: 2));
     setState(() => _isLoading = false);
-    if (context.read<AuthProvider>().isLoggedIn) {
-      context.go('/home/products');
-    } else {
-      setState(() => _error = 'Login failed');
-    }
+    // In a real app, you would call your AuthProvider's signup method here
+    context.go('/login');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Log In')),
+      appBar: AppBar(title: const Text('Sign Up')),
       body: LoadingOverlay(
         isLoading: _isLoading,
         child: Padding(
@@ -59,6 +53,17 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                TextFormField(
+                  controller: _nameController,
+                  decoration: const InputDecoration(labelText: 'Name'),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your name';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 16),
                 TextFormField(
                   controller: _emailController,
                   decoration: const InputDecoration(labelText: 'Email'),
@@ -96,14 +101,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: _isLoading ? null : _login,
-                    child: const Text('Log In'),
+                    onPressed: _isLoading ? null : _signup,
+                    child: const Text('Sign Up'),
                   ),
-                ),
-                const SizedBox(height: 8),
-                TextButton(
-                  onPressed: _isLoading ? null : () => context.go('/signup'),
-                  child: const Text('Don\'t have an account? Sign Up'),
                 ),
               ],
             ),
