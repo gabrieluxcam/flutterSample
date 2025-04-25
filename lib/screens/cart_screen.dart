@@ -23,48 +23,50 @@ class CartScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final item = items[index];
                         return ListTile(
-                          leading: Image.network(
-                            item.product.imageUrl,
-                            width: 50,
-                            height: 50,
-                            fit: BoxFit.cover,
+                          leading: ConstrainedBox(
+                            constraints: BoxConstraints(
+                              minWidth: 40,
+                              minHeight: 40,
+                              maxWidth: 56,
+                              maxHeight: 56,
+                            ),
+                            child: Image.network(
+                              item.product.imageUrl,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) => const Icon(Icons.image_not_supported),
+                            ),
                           ),
                           title: Text(item.product.title),
                           subtitle: Text(
                             '\$${(item.product.price * item.quantity).toStringAsFixed(2)}',
                           ),
-                          trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              IconButton(
-                                icon: const Icon(Icons.remove),
-                                onPressed:
-                                    () => context
-                                        .read<CartProvider>()
-                                        .updateQuantity(
-                                          item.product.id,
-                                          item.quantity - 1,
-                                        ),
-                              ),
-                              Text(item.quantity.toString()),
-                              IconButton(
-                                icon: const Icon(Icons.add),
-                                onPressed:
-                                    () => context
-                                        .read<CartProvider>()
-                                        .updateQuantity(
-                                          item.product.id,
-                                          item.quantity + 1,
-                                        ),
-                              ),
-                              IconButton(
-                                icon: const Icon(Icons.delete),
-                                onPressed:
-                                    () => context
-                                        .read<CartProvider>()
-                                        .removeItem(item.product.id),
-                              ),
-                            ],
+                          trailing: SizedBox(
+                            width: 120,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                  icon: const Icon(Icons.remove),
+                                  onPressed: () => context.read<CartProvider>().updateQuantity(
+                                    item.product.id,
+                                    item.quantity - 1,
+                                  ),
+                                ),
+                                Text(item.quantity.toString()),
+                                IconButton(
+                                  icon: const Icon(Icons.add),
+                                  onPressed: () => context.read<CartProvider>().updateQuantity(
+                                    item.product.id,
+                                    item.quantity + 1,
+                                  ),
+                                ),
+                                IconButton(
+                                  icon: const Icon(Icons.delete),
+                                  onPressed: () => context.read<CartProvider>().removeItem(item.product.id),
+                                ),
+                              ],
+                            ),
                           ),
                         );
                       },

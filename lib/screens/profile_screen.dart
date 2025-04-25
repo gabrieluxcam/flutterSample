@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import '../providers/auth_provider.dart';
+import '../providers/theme_provider.dart';
+import 'settings_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -21,23 +23,8 @@ class ProfileScreen extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {
-              // Show settings or more options
-              showModalBottomSheet(
-                context: context,
-                builder:
-                    (ctx) => ListView(
-                      shrinkWrap: true,
-                      children: const [
-                        ListTile(
-                          leading: Icon(Icons.settings),
-                          title: Text('Settings'),
-                        ),
-                        ListTile(
-                          leading: Icon(Icons.help_outline),
-                          title: Text('Help & Feedback'),
-                        ),
-                      ],
-                    ),
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (ctx) => const SettingsScreen()),
               );
             },
           ),
@@ -218,11 +205,12 @@ class ProfileScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      IconButton(
-                        icon: const Icon(Icons.nightlight_round),
-                        tooltip: 'Toggle Theme',
-                        onPressed: () {
-                          // TODO: Implement theme switching
+                      _AnimatedProfileAction(
+                        icon: Icons.nightlight_round,
+                        label: 'Toggle Theme',
+                        onTap: () {
+                          // Only toggle theme, do not navigate.
+                          context.read<ThemeProvider>().toggleTheme();
                         },
                       ),
                     ],

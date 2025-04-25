@@ -55,7 +55,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                   itemBuilder: (context, index) {
                     final o = orders[index];
                     return ListTile(
-                      leading: const Icon(Icons.receipt_long),
+                      leading: SizedBox(width: 40, child: Icon(Icons.receipt_long)),
                       title: Text('Order #${o.id}'),
                       subtitle: Text('${o.date.toLocal()}'.split(' ')[0]),
                       trailing: Text('\$${o.total.toStringAsFixed(2)}'),
