@@ -121,8 +121,9 @@ class MyApp extends StatelessWidget {
         final auth = ctx.read<AuthProvider>();
         final loggedIn = auth.isLoggedIn;
         final loggingIn = state.location == '/login';
-        if (!loggedIn && !loggingIn) return '/login';
-        if (loggedIn && loggingIn) return '/home/products';
+        final onSplash = state.location == '/';
+        if (!loggedIn && !loggingIn && !onSplash) return '/login';
+        if (loggedIn && (loggingIn || onSplash)) return '/home/products';
         return null;
       },
       refreshListenable: context.read<AuthProvider>(),

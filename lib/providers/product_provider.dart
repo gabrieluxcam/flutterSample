@@ -8,42 +8,42 @@ class ProductProvider extends ChangeNotifier {
       title: 'Product 1',
       description: 'This is the description for Product 1.',
       price: 19.99,
-      imageUrl: 'https://via.placeholder.com/150?text=Product+1',
+      imageUrl: 'assets/placeholder.png',
     ),
     Product(
       id: '2',
       title: 'Product 2',
       description: 'This is the description for Product 2.',
       price: 29.99,
-      imageUrl: 'https://via.placeholder.com/150?text=Product+2',
+      imageUrl: 'assets/placeholder.png',
     ),
     Product(
       id: '3',
       title: 'Product 3',
       description: 'This is the description for Product 3.',
       price: 39.99,
-      imageUrl: 'https://via.placeholder.com/150?text=Product+3',
+      imageUrl: 'assets/placeholder.png',
     ),
     Product(
       id: '4',
       title: 'Product 4',
       description: 'This is the description for Product 4.',
       price: 49.99,
-      imageUrl: 'https://via.placeholder.com/150?text=Product+4',
+      imageUrl: 'assets/placeholder.png',
     ),
     Product(
       id: '5',
       title: 'Product 5',
       description: 'This is the description for Product 5.',
       price: 59.99,
-      imageUrl: 'https://via.placeholder.com/150?text=Product+5',
+      imageUrl: 'assets/placeholder.png',
     ),
     Product(
       id: '6',
       title: 'Product 6',
       description: 'This is the description for Product 6.',
       price: 69.99,
-      imageUrl: 'https://via.placeholder.com/150?text=Product+6',
+      imageUrl: 'assets/placeholder.png',
     ),
   ];
 
@@ -65,9 +65,10 @@ class ProductProvider extends ChangeNotifier {
     if (query.isEmpty) {
       _filteredProducts = List.from(_products);
     } else {
-      _filteredProducts = _products
-          .where((p) => p.title.toLowerCase().contains(query.toLowerCase()))
-          .toList();
+      _filteredProducts =
+          _products
+              .where((p) => p.title.toLowerCase().contains(query.toLowerCase()))
+              .toList();
     }
     notifyListeners();
   }

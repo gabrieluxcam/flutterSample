@@ -11,6 +11,10 @@ class Product {
   final double price;
   final String imageUrl;
 
+  Object? category;
+
+  var rating;
+
   Product({
     required this.id,
     required this.title,
@@ -19,6 +23,7 @@ class Product {
     required this.imageUrl,
   });
 
-  factory Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);
+  factory Product.fromJson(Map<String, dynamic> json) =>
+      _$ProductFromJson(json);
   Map<String, dynamic> toJson() => _$ProductToJson(this);
 }
