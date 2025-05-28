@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 class AnimatedCartIcon extends StatefulWidget {
   final int itemCount;
   final VoidCallback? onTap;
-  const AnimatedCartIcon({Key? key, required this.itemCount, this.onTap}) : super(key: key);
+  const AnimatedCartIcon({super.key, required this.itemCount, this.onTap});
 
   @override
   State<AnimatedCartIcon> createState() => _AnimatedCartIconState();
 }
 
-class _AnimatedCartIconState extends State<AnimatedCartIcon> with SingleTickerProviderStateMixin {
+class _AnimatedCartIconState extends State<AnimatedCartIcon>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _scale;
   int _prevCount = 0;
@@ -17,8 +18,14 @@ class _AnimatedCartIconState extends State<AnimatedCartIcon> with SingleTickerPr
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 300));
-    _scale = Tween<double>(begin: 1, end: 1.2).animate(CurvedAnimation(parent: _controller, curve: Curves.elasticOut));
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
+    _scale = Tween<double>(
+      begin: 1,
+      end: 1.2,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.elasticOut));
     _prevCount = widget.itemCount;
   }
 
@@ -54,8 +61,14 @@ class _AnimatedCartIconState extends State<AnimatedCartIcon> with SingleTickerPr
               top: 0,
               child: Container(
                 padding: const EdgeInsets.all(3),
-                decoration: BoxDecoration(color: Colors.red, shape: BoxShape.circle),
-                child: Text('${widget.itemCount}', style: const TextStyle(fontSize: 10, color: Colors.white)),
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  shape: BoxShape.circle,
+                ),
+                child: Text(
+                  '${widget.itemCount}',
+                  style: const TextStyle(fontSize: 10, color: Colors.white),
+                ),
               ),
             ),
         ],

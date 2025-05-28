@@ -185,7 +185,7 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
               filled: true,
               fillColor: Theme.of(
                 context,
-              ).colorScheme.surfaceVariant.withOpacity(0.2),
+              ).colorScheme.surfaceContainerHighest.withOpacity(0.2),
             ),
             onChanged: (q) => context.read<ProductProvider>().filterBy(q),
           ),

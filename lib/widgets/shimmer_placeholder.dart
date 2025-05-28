@@ -4,19 +4,28 @@ class ShimmerPlaceholder extends StatefulWidget {
   final double width;
   final double height;
   final BorderRadius borderRadius;
-  const ShimmerPlaceholder({Key? key, this.width = double.infinity, this.height = 100, this.borderRadius = const BorderRadius.all(Radius.circular(8))}) : super(key: key);
+  const ShimmerPlaceholder({
+    super.key,
+    this.width = double.infinity,
+    this.height = 100,
+    this.borderRadius = const BorderRadius.all(Radius.circular(8)),
+  });
 
   @override
   State<ShimmerPlaceholder> createState() => _ShimmerPlaceholderState();
 }
 
-class _ShimmerPlaceholderState extends State<ShimmerPlaceholder> with SingleTickerProviderStateMixin {
+class _ShimmerPlaceholderState extends State<ShimmerPlaceholder>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 1200))..repeat();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1200),
+    )..repeat();
   }
 
   @override
@@ -38,11 +47,7 @@ class _ShimmerPlaceholderState extends State<ShimmerPlaceholder> with SingleTick
             gradient: LinearGradient(
               begin: Alignment(-1 + 2 * _controller.value, -0.3),
               end: Alignment(1 + 2 * _controller.value, 0.3),
-              colors: [
-                Colors.grey[300]!,
-                Colors.grey[100]!,
-                Colors.grey[300]!,
-              ],
+              colors: [Colors.grey[300]!, Colors.grey[100]!, Colors.grey[300]!],
             ),
           ),
         );

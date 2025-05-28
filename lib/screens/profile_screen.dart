@@ -303,7 +303,7 @@ class _AnimatedProfileActionState extends State<_AnimatedProfileAction>
 // Dialog for editing the user's email
 class _EmailEditDialog extends StatefulWidget {
   final String initialEmail;
-  const _EmailEditDialog({super.key, required this.initialEmail});
+  const _EmailEditDialog({required this.initialEmail});
 
   @override
   _EmailEditDialogState createState() => _EmailEditDialogState();
