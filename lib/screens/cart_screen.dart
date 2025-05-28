@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import '../providers/cart_provider.dart';
+import '../services/adyen_payment_service.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -33,7 +34,9 @@ class CartScreen extends StatelessWidget {
                             child: Image.network(
                               item.product.imageUrl,
                               fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) => const Icon(Icons.image_not_supported),
+                              errorBuilder:
+                                  (context, error, stackTrace) =>
+                                      const Icon(Icons.image_not_supported),
                             ),
                           ),
                           title: Text(item.product.title),
@@ -48,22 +51,31 @@ class CartScreen extends StatelessWidget {
                               children: [
                                 IconButton(
                                   icon: const Icon(Icons.remove),
-                                  onPressed: () => context.read<CartProvider>().updateQuantity(
-                                    item.product.id,
-                                    item.quantity - 1,
-                                  ),
+                                  onPressed:
+                                      () => context
+                                          .read<CartProvider>()
+                                          .updateQuantity(
+                                            item.product.id,
+                                            item.quantity - 1,
+                                          ),
                                 ),
                                 Text(item.quantity.toString()),
                                 IconButton(
                                   icon: const Icon(Icons.add),
-                                  onPressed: () => context.read<CartProvider>().updateQuantity(
-                                    item.product.id,
-                                    item.quantity + 1,
-                                  ),
+                                  onPressed:
+                                      () => context
+                                          .read<CartProvider>()
+                                          .updateQuantity(
+                                            item.product.id,
+                                            item.quantity + 1,
+                                          ),
                                 ),
                                 IconButton(
                                   icon: const Icon(Icons.delete),
-                                  onPressed: () => context.read<CartProvider>().removeItem(item.product.id),
+                                  onPressed:
+                                      () => context
+                                          .read<CartProvider>()
+                                          .removeItem(item.product.id),
                                 ),
                               ],
                             ),
@@ -112,6 +124,22 @@ class CartScreen extends StatelessWidget {
                           child: ElevatedButton(
                             onPressed: () => context.go('/home/cart/checkout'),
                             child: const Text('Checkout'),
+                          ),
+                        ),
+                        const SizedBox(height: 8), // Spacing between buttons
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              // Convert total to cents as required by Adyen
+                              final amountInCents =
+                                  (cart.total * 100).round().toString();
+                              AdyenPaymentService.startPayment(
+                                context,
+                                amountInCents,
+                              );
+                            },
+                            child: const Text('Adyen Payment'),
                           ),
                         ),
                       ],

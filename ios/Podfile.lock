@@ -1,4 +1,38 @@
 PODS:
+  - Adyen (5.17.0):
+    - Adyen/Actions (= 5.17.0)
+    - Adyen/Card (= 5.17.0)
+    - Adyen/Components (= 5.17.0)
+    - Adyen/Core (= 5.17.0)
+    - Adyen/DropIn (= 5.17.0)
+    - Adyen/Encryption (= 5.17.0)
+    - Adyen/Session (= 5.17.0)
+  - Adyen/Actions (5.17.0):
+    - Adyen/Core
+    - Adyen3DS2 (= 2.4.2)
+  - Adyen/Card (5.17.0):
+    - Adyen/Core
+    - Adyen/Encryption
+  - Adyen/Components (5.17.0):
+    - Adyen/Core
+    - Adyen/Encryption
+  - Adyen/Core (5.17.0):
+    - AdyenNetworking (= 3.0.1)
+  - Adyen/DropIn (5.17.0):
+    - Adyen/Actions
+    - Adyen/Card
+    - Adyen/Components
+    - Adyen/Core
+    - Adyen/Encryption
+  - Adyen/Encryption (5.17.0)
+  - Adyen/Session (5.17.0):
+    - Adyen/Actions
+    - Adyen/Core
+  - Adyen3DS2 (2.4.2)
+  - adyen_checkout (0.0.1):
+    - Adyen (= 5.17.0)
+    - Flutter
+  - AdyenNetworking (3.0.1)
   - Flutter (1.0.0)
   - flutter_credit_card (0.0.1):
     - Flutter
@@ -7,18 +41,30 @@ PODS:
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
+  - pay_ios (0.0.1):
+    - Flutter
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
 
 DEPENDENCIES:
+  - adyen_checkout (from `.symlinks/plugins/adyen_checkout/ios`)
   - Flutter (from `Flutter`)
   - flutter_credit_card (from `.symlinks/plugins/flutter_credit_card/ios`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
+  - pay_ios (from `.symlinks/plugins/pay_ios/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
 
+SPEC REPOS:
+  trunk:
+    - Adyen
+    - Adyen3DS2
+    - AdyenNetworking
+
 EXTERNAL SOURCES:
+  adyen_checkout:
+    :path: ".symlinks/plugins/adyen_checkout/ios"
   Flutter:
     :path: Flutter
   flutter_credit_card:
@@ -27,16 +73,23 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/image_picker_ios/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
+  pay_ios:
+    :path: ".symlinks/plugins/pay_ios/ios"
   shared_preferences_foundation:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
 
 SPEC CHECKSUMS:
+  Adyen: 31fe464ac225710264ab8b2d065c294de2b82466
+  Adyen3DS2: aaa0a86c89f4f5d482d20894b2f91e91a63aee6b
+  adyen_checkout: 36b13ec039503a151032f3611c7ab1e6ed70bedb
+  AdyenNetworking: eb6196954566a5b3e0c3c56fa12d8d69948603dc
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_credit_card: 48fb35065294868bc6a3e7f18a42f28929b84f48
   image_picker_ios: c560581cceedb403a6ff17f2f816d7fea1421fc1
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
+  pay_ios: 8c7beb9c61d885f3f51b61f75f8793023fc8843a
   shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
 
-PODFILE CHECKSUM: 4305caec6b40dde0ae97be1573c53de1882a07e5
+PODFILE CHECKSUM: 20e260c9bb3f61194c661a4ba028da86e4f3ed96
 
 COCOAPODS: 1.16.2

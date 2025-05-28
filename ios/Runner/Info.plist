@@ -47,5 +47,22 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>This app needs access to your camera to let you update your profile picture.</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>flutteraitests</string>
+			</array>
+			<key>CFBundleURLName</key>
+			<string>adyen.payment</string>
+		</dict>
+	</array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>https</string>
+		<string>http</string>
+		<string>flutteraitests</string>
+	</array>
 </dict>
 </plist>
