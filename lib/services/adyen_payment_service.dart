@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:adyen_checkout/adyen_checkout.dart';
+import 'package:flutter_uxcam/flutter_uxcam.dart';
 
 class AdyenPaymentService {
   static const String _clientKey = 'test_BNQ6U2EPYNA2LBWFZSLEA5GPYQDQISSA';
